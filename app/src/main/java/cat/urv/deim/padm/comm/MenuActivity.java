@@ -1,4 +1,4 @@
-package cat.urv.comm.padm;
+package cat.urv.deim.padm.comm;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import cat.urv.comm.padm.databinding.ActivityMenuBinding;
+import cat.urv.deim.padm.comm.databinding.ActivityMenuBinding;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class MenuActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_contacts, R.id.nav_gallery, R.id.nav_profile)
+                R.id.nav_contacts, R.id.nav_gallery)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_menu);

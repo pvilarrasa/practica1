@@ -1,4 +1,4 @@
-package cat.urv.comm.padm;
+package cat.urv.deim.padm.comm;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Map;
 
-import cat.urv.comm.padm.factories.IntentFactory;
-import cat.urv.comm.padm.persistence.UserRepository;
+import cat.urv.deim.padm.comm.factories.IntentFactory;
+import cat.urv.deim.padm.comm.persistence.UserRepository;
 
 public class LoginActivity extends AppCompatActivity {
 

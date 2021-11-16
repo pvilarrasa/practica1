@@ -6,7 +6,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "cat.urv.comm.padm"
+        applicationId "cat.urv.deim.padm.comm"
         minSdk 25
         targetSdk 31
         versionCode 1

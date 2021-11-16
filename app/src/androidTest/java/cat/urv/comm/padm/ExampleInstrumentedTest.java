@@ -1,4 +1,4 @@
-package cat.urv.comm.padm;
+package cat.urv.deim.padm.comm;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("cat.urv.comm.padm", appContext.getPackageName());
+        assertEquals("cat.urv.deim.padm.com", appContext.getPackageName());
     }
 }

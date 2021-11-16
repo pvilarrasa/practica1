@@ -1,4 +1,4 @@
-package cat.urv.comm.padm;
+package cat.urv.deim.padm.comm;
 
 public class AppConfig {
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cat.urv.comm.padm">
+    package="cat.urv.deim.padm.comm">
 
     <application
         android:allowBackup="true"

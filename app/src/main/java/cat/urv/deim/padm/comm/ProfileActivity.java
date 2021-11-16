@@ -1,4 +1,4 @@
-package cat.urv.comm.padm;
+package cat.urv.deim.padm.comm;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import cat.urv.comm.padm.factories.IntentFactory;
+import cat.urv.deim.padm.comm.factories.IntentFactory;
 
 public class ProfileActivity extends AppCompatActivity {
 

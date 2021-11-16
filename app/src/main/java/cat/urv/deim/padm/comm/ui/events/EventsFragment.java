@@ -1,4 +1,4 @@
-package cat.urv.comm.padm.ui.gallery;
+package cat.urv.deim.padm.comm.ui.events;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,22 +11,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import cat.urv.comm.padm.R;
-import cat.urv.comm.padm.databinding.FragmentContactsRecyclerBinding;
-import cat.urv.comm.padm.persistence.UserRepository;
+import cat.urv.deim.padm.comm.R;
+import cat.urv.deim.padm.comm.databinding.FragmentEventsRecyclerBinding;
+import cat.urv.deim.padm.comm.persistence.UserRepository;
 
-public class GalleryFragment extends Fragment {
+public class EventsFragment extends Fragment {
 
-    private FragmentContactsRecyclerBinding binding;
+    private FragmentEventsRecyclerBinding binding;
     private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        binding = FragmentContactsRecyclerBinding.inflate(inflater, container, false);
+        binding = FragmentEventsRecyclerBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-         recyclerView = binding.contactsRecyclerView;
+         recyclerView = binding.eventsRecyclerView;
 
         return root;
     }
@@ -35,8 +35,8 @@ public class GalleryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (recyclerView != null){
-            ContactsRecyclerViewAdapter adapter;
-            adapter = new ContactsRecyclerViewAdapter(
+            EventsRecyclerViewAdapter adapter;
+            adapter = new EventsRecyclerViewAdapter(
                                             getContext(),
                                             R.layout.listview_item,
                                             UserRepository.getContacts(getContext()));

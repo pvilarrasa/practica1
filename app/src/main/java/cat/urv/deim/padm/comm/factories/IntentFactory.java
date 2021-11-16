@@ -1,11 +1,11 @@
-package cat.urv.comm.padm.factories;
+package cat.urv.deim.padm.comm.factories;
 
 import android.content.Context;
 import android.content.Intent;
 
-import cat.urv.comm.padm.AppConfig;
-import cat.urv.comm.padm.MenuActivity;
-import cat.urv.comm.padm.ProfileActivity;
+import cat.urv.deim.padm.comm.AppConfig;
+import cat.urv.deim.padm.comm.MenuActivity;
+import cat.urv.deim.padm.comm.ProfileActivity;
 
 
 public class IntentFactory {

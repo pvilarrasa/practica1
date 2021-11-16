@@ -1,4 +1,4 @@
-package cat.urv.comm.padm.ui.gallery;
+package cat.urv.deim.padm.comm.ui.events;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,15 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import cat.urv.comm.padm.R;
-import cat.urv.comm.padm.persistence.Contact;
+import cat.urv.deim.padm.comm.R;
+import cat.urv.deim.padm.comm.persistence.Contact;
 
-public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter {
+public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
     private List<Contact> contacts;
     private int itemResourceId;
     private Context context;
 
-    public ContactsRecyclerViewAdapter(Context context, int resource, List<Contact> contacts) {
+    public EventsRecyclerViewAdapter(Context context, int resource, List<Contact> contacts) {
         this.contacts = contacts;
         this.context = context;
         itemResourceId = resource;

@@ -1,4 +1,4 @@
-package cat.urv.comm.padm.persistence;
+package cat.urv.deim.padm.comm.persistence;
 
 public class Contact {
 
