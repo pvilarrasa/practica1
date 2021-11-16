@@ -6,9 +6,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import cat.urv.deim.padm.comm.factories.IntentFactory;
@@ -53,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent intent = IntentFactory.buildMenuActivity(view.getContext());
 
+                    volley();
+
                     startActivity(intent);
                     finish(); // Close the current activity
                     Log.i(TAG, "Authencation: success");
@@ -62,5 +74,38 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void volley(){
+        String email = "pol.vilarrasa@estudiants.urv.cat";
+        String token = "679270ca0ec20d5ceeda55d2e1d5b17e9277463e";
+        String password = "t8BrZdM3QXn7S5mL";
+        String url = "https://apidev.gdgtarragona.net/api/json/news";
+        final TextView t = (TextView) findViewById(R.id.resultat);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                t.setText(response);
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+                t.setText("no va");
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("mail", email);
+                params.put("username", password);
+                params.put("token", token);
+
+                return params;
+            }
+        };
+
+        queue.add(sR);
     }
 }
