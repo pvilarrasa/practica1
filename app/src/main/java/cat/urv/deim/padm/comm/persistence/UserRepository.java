@@ -2,14 +2,30 @@ package cat.urv.deim.padm.comm.persistence;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.TextView;
 
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cat.urv.deim.padm.comm.LoginActivity;
+import cat.urv.deim.padm.comm.R;
+import cat.urv.deim.padm.comm.exceptions.LoginException;
 
 public class UserRepository {
 
@@ -19,6 +35,16 @@ public class UserRepository {
 
     public static final String CREDENTIAL_USER = "CREDENTIAL_USER";
     public static final String CREDENTIAL_PASSWORD = "CREDENTIAL_PASSWORD";
+
+    // propietats de l'usuari
+    public static String username;
+    public static String email;
+    public static String password;
+    public static String token;
+    public static String errorMessage;
+
+    public static boolean validLogin;
+
 
     public static List<Contact> getContacts(Context context){
         List<Contact> contacts = new ArrayList<Contact>();
@@ -97,5 +123,52 @@ public class UserRepository {
         }catch(Exception e){
             return credentials;
         }
+    }
+
+    // crida volley per a obtenir token usuari
+    public static void obtainUserToken(Context context, String email, String username, String password){
+        String url = "https://apidev.gdgtarragona.net/api/json/obtain_token";
+        String pepe = ";!";
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                UserRepository.username = username;
+                UserRepository.email = email;
+                UserRepository.password = password;
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String message = jsonObject.getString("message");
+                    int status = jsonObject.getInt("status");
+
+                    if(status == 200){
+                        String token = message.split("Token: ")[1];
+                        UserRepository.token = token;
+                        validLogin = true;
+                    }else{
+                        errorMessage = message;
+                        validLogin = false;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+                validLogin = false;
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("mail", email);
+                params.put("username", username);
+                params.put("password", password);
+                return params;
+            }
+        };
+
+        queue.add(sR);
     }
 }

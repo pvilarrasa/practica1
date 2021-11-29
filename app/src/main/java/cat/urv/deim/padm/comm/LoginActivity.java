@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
+import cat.urv.deim.padm.comm.exceptions.LoginException;
 import cat.urv.deim.padm.comm.factories.IntentFactory;
 import cat.urv.deim.padm.comm.persistence.UserRepository;
 
@@ -29,8 +30,10 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     private EditText usernameView;
+    private EditText emailView;
     private EditText passwordView;
     private Button loginAccessButton;
+    private TextView errorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         this.usernameView = this.findViewById(R.id.login_username);
+        this.emailView = this.findViewById(R.id.login_email);
         this.passwordView = this.findViewById(R.id.login_password);
+        this.errorTextView = this.findViewById(R.id.errorTextView);
 
         Map<String, String> credentials = UserRepository.loadCredentials(this);
         if (credentials.containsKey(UserRepository.CREDENTIAL_USER)){
@@ -54,58 +59,21 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String credentialUsername = usernameView.getText().toString();
+                String credentialEmail = emailView.getText().toString();
                 String credentialPassword = passwordView.getText().toString();
 
-
-                if (UserRepository.validateCredentials(getApplication(), credentialUsername, credentialPassword)) {
-
-                    boolean isSaved = UserRepository.saveCredentials(getApplicationContext(), credentialUsername, credentialPassword);
-
+                // obtenir token
+                UserRepository.obtainUserToken(LoginActivity.this, credentialEmail, credentialUsername, credentialPassword);
+                if(UserRepository.validLogin){
                     Intent intent = IntentFactory.buildMenuActivity(view.getContext());
-
-                    volley();
-
                     startActivity(intent);
                     finish(); // Close the current activity
-                    Log.i(TAG, "Authencation: success");
-                } else {
-                    Log.e(TAG, "Authentication: access error");
+                }else{
+                    errorTextView.setText(UserRepository.errorMessage);
+                    errorTextView.setVisibility(TextView.VISIBLE);
                 }
-
             }
         });
     }
 
-    private void volley(){
-        String email = "pol.vilarrasa@estudiants.urv.cat";
-        String token = "679270ca0ec20d5ceeda55d2e1d5b17e9277463e";
-        String password = "t8BrZdM3QXn7S5mL";
-        String url = "https://apidev.gdgtarragona.net/api/json/news";
-        final TextView t = (TextView) findViewById(R.id.resultat);
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                t.setText(response);
-            }
-        }, new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error){
-                t.setText("no va");
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("mail", email);
-                params.put("username", password);
-                params.put("token", token);
-
-                return params;
-            }
-        };
-
-        queue.add(sR);
-    }
 }
