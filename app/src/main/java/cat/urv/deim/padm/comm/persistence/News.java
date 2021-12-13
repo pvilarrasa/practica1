@@ -5,18 +5,18 @@ public class News {
 
     String date;
     String dateUpdate;
-    String imageUrl;
+    String imageURL;
     String subtitle;
-    Tag listTags[];
+    Tag tags[];
     String text;
     String title;
 
     public News(String date, String dateUpdate, String imageUrl, String subtitle, Tag[] listTags, String text, String title) {
         this.date = date;
         this.dateUpdate = dateUpdate;
-        this.imageUrl = imageUrl;
+        this.imageURL = imageUrl;
         this.subtitle = subtitle;
-        this.listTags = listTags;
+        this.tags = listTags;
         this.text = text;
         this.title = title;
     }
@@ -30,7 +30,7 @@ public class News {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return imageURL;
     }
 
     public String getSubtitle() {
@@ -38,7 +38,7 @@ public class News {
     }
 
     public Tag[] getListTags() {
-        return listTags;
+        return tags;
     }
 
     public String getText() {
@@ -58,7 +58,7 @@ public class News {
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+        this.imageURL = imageUrl;
     }
 
     public void setSubtitle(String subtitle) {
@@ -66,7 +66,7 @@ public class News {
     }
 
     public void setListTags(Tag[] listTags) {
-        this.listTags = listTags;
+        this.tags = listTags;
     }
 
     public void setText(String text) {

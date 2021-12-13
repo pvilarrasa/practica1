@@ -39,7 +39,8 @@ public class EventsFragment extends Fragment {
             adapter = new EventsRecyclerViewAdapter(
                                             getContext(),
                                             R.layout.listview_item,
-                                            UserRepository.getContacts(getContext()));
+                                            //UserRepository.getContacts(getContext())
+                                            null);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
         }

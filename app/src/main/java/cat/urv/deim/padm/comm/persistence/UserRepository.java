@@ -15,9 +15,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.reflect.TypeToken;
 
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +31,6 @@ import java.util.Map;
 
 import cat.urv.deim.padm.comm.LoginActivity;
 import cat.urv.deim.padm.comm.R;
-import cat.urv.deim.padm.comm.exceptions.LoginException;
 
 public class UserRepository {
 
@@ -59,19 +64,6 @@ public class UserRepository {
         contacts.add(contact_3);
         contacts.add(contact_4);
         return contacts;
-    }
-
-    public static List<HashMap<String,String>> getContactsMap(Context context){
-        List<HashMap<String,String>> data = new ArrayList<>();
-        HashMap<String,String> itemData;
-        for (Contact contact: UserRepository.getContacts(context)){
-            itemData = new HashMap<>();
-            itemData.put(UserRepository.FIELD_NAME, contact.getName());
-            itemData.put(UserRepository.FIELD_SURNAMES, contact.getSurnames());
-            itemData.put(UserRepository.FIELD_AGE, String.valueOf(contact.getAge()));
-            data.add(itemData);
-        }
-        return data;
     }
 
 
@@ -171,4 +163,5 @@ public class UserRepository {
 
         queue.add(sR);
     }
+
 }

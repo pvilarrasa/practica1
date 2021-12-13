@@ -10,8 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import cat.urv.deim.padm.comm.LoginActivity;
 import cat.urv.deim.padm.comm.R;
 import cat.urv.deim.padm.comm.databinding.FragmentNewsRecyclerBinding;
+import cat.urv.deim.padm.comm.persistence.NewsRepository;
 import cat.urv.deim.padm.comm.persistence.UserRepository;
 
 public class NewsFragment extends Fragment {
@@ -26,6 +28,7 @@ public class NewsFragment extends Fragment {
         View root = binding.getRoot();
 
          recyclerView = binding.newsRecyclerView;
+        NewsRepository.obtainNews(getContext(), UserRepository.email, UserRepository.username, UserRepository.token);
 
         return root;
     }
@@ -38,7 +41,7 @@ public class NewsFragment extends Fragment {
             adapter = new NewsRecyclerViewAdapter(
                                             getContext(),
                                             R.layout.listview_item,
-                                            UserRepository.getContacts(getContext()));
+                                           NewsRepository.news);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
         }

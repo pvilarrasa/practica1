@@ -11,63 +11,59 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import cat.urv.deim.padm.comm.R;
-import cat.urv.deim.padm.comm.persistence.Contact;
+import cat.urv.deim.padm.comm.persistence.News;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter {
-    private List<Contact> contacts;
+    private List<News> news;
     private int itemResourceId;
     private Context context;
 
-    public NewsRecyclerViewAdapter(Context context, int resource, List<Contact> contacts) {
-        this.contacts = contacts;
+    public NewsRecyclerViewAdapter(Context context, int resource, List<News> news) {
+        this.news = news;
         this.context = context;
         itemResourceId = resource;
     }
 
     @NonNull
     @Override
-    public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ContactViewHolder contactViewHolder;
+    public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        NewsViewHolder newsViewHolder;
 
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.listview_item, parent, false);
 
-        contactViewHolder = new ContactViewHolder(view);
-        return contactViewHolder;
+        newsViewHolder = new NewsViewHolder(view);
+        return newsViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            ContactViewHolder contactViewHolder = (ContactViewHolder) holder;
-            contactViewHolder.setData(this.contacts.get(position));
-
+            NewsViewHolder newsViewHolder = (NewsViewHolder) holder;
+            newsViewHolder.setData(this.news.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (contacts == null)
+        if (news == null)
             return 0;
         else
-            return this.contacts.size();
+            return this.news.size();
     }
 
-    private static class ContactViewHolder extends RecyclerView.ViewHolder{
+    private static class NewsViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView name;
-        private TextView surnames;
-        private TextView age;
+        private TextView title;
+        private TextView date;
 
-        public ContactViewHolder(@NonNull View view) {
+        public NewsViewHolder(@NonNull View view) {
             super(view);
-            name = view.findViewById(R.id.name);
-            surnames = view.findViewById(R.id.surname);
-            age = view.findViewById(R.id.age);
+            title = view.findViewById(R.id.title);
+            date = view.findViewById(R.id.description);
         }
 
-        public void setData(Contact contact) {
-            this.name.setText(contact.getName());
-            this.surnames.setText(contact.getSurnames());
-            this.age.setText(String.valueOf(contact.getAge()));
+        public void setData(News news) {
+            this.title.setText(news.getTitle());
+            this.date.setText(news.getDate());
         }
     }
 }

@@ -21,7 +21,7 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import cat.urv.deim.padm.comm.exceptions.LoginException;
+
 import cat.urv.deim.padm.comm.factories.IntentFactory;
 import cat.urv.deim.padm.comm.persistence.UserRepository;
 
