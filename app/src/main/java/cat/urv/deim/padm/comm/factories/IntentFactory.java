@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 
 import cat.urv.deim.padm.comm.AppConfig;
+import cat.urv.deim.padm.comm.EventDetailActivity;
 import cat.urv.deim.padm.comm.MenuActivity;
 import cat.urv.deim.padm.comm.NewsDetailActivity;
 import cat.urv.deim.padm.comm.ProfileActivity;
+import cat.urv.deim.padm.comm.persistence.Event;
 import cat.urv.deim.padm.comm.persistence.News;
 
 
@@ -28,6 +30,13 @@ public class IntentFactory {
         Intent intent = new Intent();
         intent.setClass(context, NewsDetailActivity.class);
         intent.putExtra("newsObject", news);
+        return intent;
+    }
+
+    public static Intent buildEventDetailActivity(Context context, Event event){
+        Intent intent = new Intent();
+        intent.setClass(context, EventDetailActivity.class);
+        intent.putExtra("eventObject", event);
         return intent;
     }
 

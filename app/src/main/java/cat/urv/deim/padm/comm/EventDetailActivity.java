@@ -3,12 +3,15 @@ package cat.urv.deim.padm.comm;
 import androidx.appcompat.app.AppCompatActivity;
 import cat.urv.deim.padm.comm.persistence.Event;
 import cat.urv.deim.padm.comm.persistence.EventRepository;
+import cat.urv.deim.padm.comm.persistence.News;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class EventDetailActivity extends AppCompatActivity {
 
@@ -25,9 +28,7 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
-
-        this.event = EventRepository.getEventsAt(position);
+        this.event = (Event)intent.getSerializableExtra("eventObject");
 
         // agafem les vistes
         this.descriptionTextView = this.findViewById(R.id.eventDescription);
@@ -44,8 +45,11 @@ public class EventDetailActivity extends AppCompatActivity {
         this.typeTextView.setText(this.event.getType());
         this.webUrlTextView.setText(this.event.getWebURL());
 
-        Uri imgUri = Uri.parse(this.event.getImageURL());
-        this.photoImageView.setImageURI(imgUri);
+        Picasso.get()
+                .load(this.event.getImageURL())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(this.photoImageView);
 
     }
 }

@@ -37,20 +37,20 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public EventsRecyclerViewAdapter.EventsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        EventsRecyclerViewAdapter.EventsViewHolder eventsViewHolder;
+    public EventsRecyclerViewAdapter.EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        EventsRecyclerViewAdapter.EventViewHolder eventsViewHolder;
 
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.listview_item, parent, false);
 
-        eventsViewHolder = new EventsRecyclerViewAdapter.EventsViewHolder(view);
+        eventsViewHolder = new EventsRecyclerViewAdapter.EventViewHolder(view);
         return eventsViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        EventsRecyclerViewAdapter.EventsViewHolder eventsViewHolder = (EventsRecyclerViewAdapter.EventsViewHolder) holder;
-        eventsViewHolder.setData(this.events.get(position), position);
+        EventsRecyclerViewAdapter.EventViewHolder eventsViewHolder = (EventsRecyclerViewAdapter.EventViewHolder) holder;
+        eventsViewHolder.setData(this.events.get(position));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
             return this.events.size();
     }
 
-    private static class EventsViewHolder extends RecyclerView.ViewHolder{
+    private static class EventViewHolder extends RecyclerView.ViewHolder{
 
         private TextView name;
         private TextView type;
@@ -69,7 +69,7 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
 
         private final Context context;
 
-        public EventsViewHolder(@NonNull View view) {
+        public EventViewHolder(@NonNull View view) {
             super(view);
             context = view.getContext();
             name = view.findViewById(R.id.title);
@@ -77,13 +77,13 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
             button = view.findViewById(R.id.btnOpenNews);
         }
 
-        public void setData(Event event, int position) {
+        public void setData(Event event) {
             this.name.setText(event.getName());
             this.type.setText(event.getType());
             this.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = IntentFactory.buildNewsDetailActivity(view.getContext(), position);
+                    Intent intent = IntentFactory.buildEventDetailActivity(view.getContext(),event);
                     context.startActivity(intent);
                 }
             });

@@ -33,7 +33,7 @@ public class EventRepository {
 
     // crida volley per a obtenir events usuari
     public static void obtainEvents(Context context, String email, String username, String token, EventsRecyclerViewAdapter adapter){
-        String url = "https://apidev.gdgtarragona.net/api/json/news";
+        String url = "https://apidev.gdgtarragona.net/api/json/events";
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

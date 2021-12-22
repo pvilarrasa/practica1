@@ -1,6 +1,8 @@
 package cat.urv.deim.padm.comm.persistence;
 
-public class Event {
+import java.io.Serializable;
+
+public class Event implements Serializable {
 
     int id;
     String description;
