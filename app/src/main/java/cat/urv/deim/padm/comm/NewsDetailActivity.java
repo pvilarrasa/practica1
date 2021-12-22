@@ -2,12 +2,22 @@ package cat.urv.deim.padm.comm;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+import cat.urv.deim.padm.comm.factories.IntentFactory;
 import cat.urv.deim.padm.comm.persistence.News;
 import cat.urv.deim.padm.comm.persistence.NewsRepository;
 
@@ -29,9 +39,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_news_detail);
 
         Intent intent = getIntent();
-        int position = intent.getIntExtra("position", 0);
-
-        this.news = NewsRepository.getNewsAt(position);
+        this.news = (News)intent.getSerializableExtra("newsObject");
 
         // agafem les vistes
         this.titleTextView = this.findViewById(R.id.newsTitle);
@@ -48,9 +56,12 @@ public class NewsDetailActivity extends AppCompatActivity {
         this.subtitleTextView.setText(this.news.getSubtitle());
         this.textTextView.setText(this.news.getText());
         this.tagsTextView.setText(this.news.getTagsAsString());
-        this.dateUpdateTextView.setText(this.news.getDateUpdate());
+        this.dateUpdateTextView.setText("Last updated: " + this.news.getDateUpdate());
 
-        Uri imgUri = Uri.parse(this.news.getImageUrl());
-        this.photoImageView.setImageURI(imgUri);
+        Picasso.get()
+                .load(this.news.getImageUrl())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(this.photoImageView);
     }
 }

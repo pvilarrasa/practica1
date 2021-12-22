@@ -79,7 +79,7 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter {
             this.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = IntentFactory.buildNewsDetailActivity(view.getContext(), position);
+                    Intent intent = IntentFactory.buildNewsDetailActivity(view.getContext(), news);
                     context.startActivity(intent);
                 }
             });

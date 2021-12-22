@@ -7,6 +7,7 @@ import cat.urv.deim.padm.comm.AppConfig;
 import cat.urv.deim.padm.comm.MenuActivity;
 import cat.urv.deim.padm.comm.NewsDetailActivity;
 import cat.urv.deim.padm.comm.ProfileActivity;
+import cat.urv.deim.padm.comm.persistence.News;
 
 
 public class IntentFactory {
@@ -23,10 +24,10 @@ public class IntentFactory {
         return intent;
     }
 
-    public static Intent buildNewsDetailActivity(Context context, int position){
+    public static Intent buildNewsDetailActivity(Context context, News news){
         Intent intent = new Intent();
         intent.setClass(context, NewsDetailActivity.class);
-        intent.putExtra("position", position);
+        intent.putExtra("newsObject", news);
         return intent;
     }
 

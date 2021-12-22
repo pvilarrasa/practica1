@@ -1,8 +1,11 @@
 package cat.urv.deim.padm.comm.persistence;
 
 
-public class News {
+import java.io.Serializable;
 
+public class News implements Serializable {
+
+    int id;
     String date;
     String dateUpdate;
     String imageURL;
@@ -11,7 +14,8 @@ public class News {
     String text;
     String title;
 
-    public News(String date, String dateUpdate, String imageUrl, String subtitle, Tag[] listTags, String text, String title) {
+    public News(int id, String date, String dateUpdate, String imageUrl, String subtitle, Tag[] listTags, String text, String title) {
+        this.id = id;
         this.date = date;
         this.dateUpdate = dateUpdate;
         this.imageURL = imageUrl;
@@ -19,6 +23,14 @@ public class News {
         this.tags = listTags;
         this.text = text;
         this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDate() {
