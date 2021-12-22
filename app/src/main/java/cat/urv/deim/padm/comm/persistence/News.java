@@ -76,4 +76,16 @@ public class News {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public String getTagsAsString(){
+        String ret = "";
+        for (int i = 0; i < this.tags.length; i++) {
+            ret += this.tags[i].getName();
+            // si no és l'ultim posem coma
+            if(i != this.tags.length - 1){
+                ret += ", ";
+            }
+        }
+        return ret;
+    }
 }

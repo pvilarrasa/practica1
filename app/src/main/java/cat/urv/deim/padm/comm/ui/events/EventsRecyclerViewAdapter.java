@@ -61,8 +61,8 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
 
         public EventViewHolder(@NonNull View view) {
             super(view);
-            name = view.findViewById(R.id.name);
-            description = view.findViewById(R.id.description);
+            name = view.findViewById(R.id.title);
+            description = view.findViewById(R.id.date);
         }
 
         public void setData(Event event) {

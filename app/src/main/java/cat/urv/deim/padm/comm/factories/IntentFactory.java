@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import cat.urv.deim.padm.comm.AppConfig;
 import cat.urv.deim.padm.comm.MenuActivity;
+import cat.urv.deim.padm.comm.NewsDetailActivity;
 import cat.urv.deim.padm.comm.ProfileActivity;
 
 
@@ -19,6 +20,13 @@ public class IntentFactory {
     public static Intent buildProfileActivity(Context context){
         Intent intent = new Intent();
         intent.setClass(context, ProfileActivity.class);
+        return intent;
+    }
+
+    public static Intent buildNewsDetailActivity(Context context, int position){
+        Intent intent = new Intent();
+        intent.setClass(context, NewsDetailActivity.class);
+        intent.putExtra("position", position);
         return intent;
     }
 

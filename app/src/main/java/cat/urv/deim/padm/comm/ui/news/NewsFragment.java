@@ -27,8 +27,7 @@ public class NewsFragment extends Fragment {
         binding = FragmentNewsRecyclerBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-         recyclerView = binding.newsRecyclerView;
-        NewsRepository.obtainNews(getContext(), UserRepository.email, UserRepository.username, UserRepository.token);
+        recyclerView = binding.newsRecyclerView;
 
         return root;
     }
@@ -44,6 +43,8 @@ public class NewsFragment extends Fragment {
                                            NewsRepository.news);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
+            NewsRepository.obtainNews(getContext(), UserRepository.email, UserRepository.username, UserRepository.token, adapter);
+            System.out.println("");
         }
     }
 
