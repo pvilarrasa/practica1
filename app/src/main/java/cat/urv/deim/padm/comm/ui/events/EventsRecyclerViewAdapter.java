@@ -1,9 +1,11 @@
 package cat.urv.deim.padm.comm.ui.events;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,8 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import cat.urv.deim.padm.comm.R;
+import cat.urv.deim.padm.comm.factories.IntentFactory;
 import cat.urv.deim.padm.comm.persistence.Contact;
 import cat.urv.deim.padm.comm.persistence.Event;
+import cat.urv.deim.padm.comm.persistence.News;
+import cat.urv.deim.padm.comm.ui.news.NewsRecyclerViewAdapter;
 
 public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
     private List<Event> events;
@@ -26,23 +31,26 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
         itemResourceId = resource;
     }
 
+    public void setEvents(List<Event> events){
+        this.events = events;
+    }
+
     @NonNull
     @Override
-    public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        EventViewHolder eventViewHolder;
+    public EventsRecyclerViewAdapter.EventsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        EventsRecyclerViewAdapter.EventsViewHolder eventsViewHolder;
 
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.listview_item, parent, false);
 
-        eventViewHolder = new EventViewHolder(view);
-        return eventViewHolder;
+        eventsViewHolder = new EventsRecyclerViewAdapter.EventsViewHolder(view);
+        return eventsViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        EventViewHolder eventViewHolder = (EventViewHolder) holder;
-        eventViewHolder.setData(this.events.get(position));
-
+        EventsRecyclerViewAdapter.EventsViewHolder eventsViewHolder = (EventsRecyclerViewAdapter.EventsViewHolder) holder;
+        eventsViewHolder.setData(this.events.get(position), position);
     }
 
     @Override
@@ -53,21 +61,32 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
             return this.events.size();
     }
 
-    private static class EventViewHolder extends RecyclerView.ViewHolder{
+    private static class EventsViewHolder extends RecyclerView.ViewHolder{
 
         private TextView name;
-        private TextView description;
-        private TextView age;
+        private TextView type;
+        private Button button;
 
-        public EventViewHolder(@NonNull View view) {
+        private final Context context;
+
+        public EventsViewHolder(@NonNull View view) {
             super(view);
+            context = view.getContext();
             name = view.findViewById(R.id.title);
-            description = view.findViewById(R.id.date);
+            type = view.findViewById(R.id.date);
+            button = view.findViewById(R.id.btnOpenNews);
         }
 
-        public void setData(Event event) {
+        public void setData(Event event, int position) {
             this.name.setText(event.getName());
-            this.description.setText(event.getDescription());
+            this.type.setText(event.getType());
+            this.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = IntentFactory.buildNewsDetailActivity(view.getContext(), position);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

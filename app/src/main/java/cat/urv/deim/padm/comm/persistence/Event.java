@@ -2,21 +2,27 @@ package cat.urv.deim.padm.comm.persistence;
 
 public class Event {
 
+    int id;
     String description;
     String imageURL;
     String name;
-    cat.urv.deim.padm.comm.persistence.Tag listTags[];
+    cat.urv.deim.padm.comm.persistence.Tag tags[];
     String type;
     String webURL;
 
 
-    public Event(String description, String imageURL, String name, cat.urv.deim.padm.comm.persistence.Tag[] listTags, String type, String webURL) {
+    public Event(int id, String description, String imageURL, String name, cat.urv.deim.padm.comm.persistence.Tag[] tags, String type, String webURL) {
+        this.id = id;
         this.description = description;
         this.imageURL = imageURL;
         this.name = name;
-        this.listTags = listTags;
+        this.tags = tags;
         this.type = type;
         this.webURL = webURL;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getDescription() {
@@ -32,7 +38,7 @@ public class Event {
     }
 
     public cat.urv.deim.padm.comm.persistence.Tag[] getListTags() {
-        return listTags;
+        return tags;
     }
 
     public String getType() {
@@ -41,6 +47,10 @@ public class Event {
 
     public String getWebURL() {
         return webURL;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setDescription(String description) {
@@ -56,7 +66,7 @@ public class Event {
     }
 
     public void setListTags(cat.urv.deim.padm.comm.persistence.Tag[] listTags) {
-        this.listTags = listTags;
+        this.tags = listTags;
     }
 
     public void setType(String type) {
@@ -65,5 +75,17 @@ public class Event {
 
     public void setWebURL(String webURL) {
         this.webURL = webURL;
+    }
+
+    public String getTagsAsString(){
+        String ret = "";
+        for (int i = 0; i < this.tags.length; i++) {
+            ret += this.tags[i].getName();
+            // si no és l'ultim posem coma
+            if(i != this.tags.length - 1){
+                ret += ", ";
+            }
+        }
+        return ret;
     }
 }

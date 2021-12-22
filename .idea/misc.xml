@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/activity_event_detail.xml" value="0.2015625" />
         <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/activity_login.xml" value="0.25885416666666666" />
         <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/activity_main.xml" value="0.20572916666666666" />
         <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/activity_menu.xml" value="0.1" />
+        <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/activity_news_detail.xml" value="0.2015625" />
         <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/app_bar_menu.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/fragment_events.xml" value="0.1" />
         <entry key="..\:/Users/cherc/Documents/AndroidStudio/practica1/app/src/main/res/layout/fragment_events_recycler.xml" value="0.20520833333333333" />
@@ -30,9 +32,6 @@
         <entry key="..\:/Users/polvi/AndroidStudioProjects/Practica1/app/src/main/res/menu/activity_menu_drawer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/polvi/AndroidStudioProjects/Practica1/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/polvi/AndroidStudioProjects/Practica1/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22135416666666666" />
-        <entry key="..\:/Users/polvi/AndroidStudioProjects/practica1/app/src/main/res/layout/activity_news_detail.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/polvi/AndroidStudioProjects/practica1/app/src/main/res/layout/fragment_news_recycler.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/polvi/AndroidStudioProjects/practica1/app/src/main/res/layout/listview_item.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import cat.urv.deim.padm.comm.R;
 import cat.urv.deim.padm.comm.databinding.FragmentEventsRecyclerBinding;
+import cat.urv.deim.padm.comm.databinding.FragmentNewsRecyclerBinding;
+import cat.urv.deim.padm.comm.persistence.EventRepository;
+import cat.urv.deim.padm.comm.persistence.NewsRepository;
 import cat.urv.deim.padm.comm.persistence.UserRepository;
+import cat.urv.deim.padm.comm.ui.news.NewsRecyclerViewAdapter;
 
 public class EventsFragment extends Fragment {
 
@@ -26,7 +30,7 @@ public class EventsFragment extends Fragment {
         binding = FragmentEventsRecyclerBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-         recyclerView = binding.eventsRecyclerView;
+        recyclerView = binding.eventsRecyclerView;
 
         return root;
     }
@@ -37,12 +41,13 @@ public class EventsFragment extends Fragment {
         if (recyclerView != null){
             EventsRecyclerViewAdapter adapter;
             adapter = new EventsRecyclerViewAdapter(
-                                            getContext(),
-                                            R.layout.listview_item,
-                                            //UserRepository.getContacts(getContext())
-                                            null);
+                    getContext(),
+                    R.layout.listview_item,
+                    EventRepository.events);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
+            EventRepository.obtainEvents(getContext(), UserRepository.email, UserRepository.username, UserRepository.token, adapter);
+            System.out.println("");
         }
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewsDetailActivity">
+    tools:context=".EventDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,54 +12,40 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/newsPhoto"
+            android:id="@+id/eventImageURL"
             android:layout_width="match_parent"
-            android:layout_height="296dp"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            tools:ignore="ImageContrastCheck,ImageContrastCheck,ImageContrastCheck,ImageContrastCheck" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/newsTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/newsDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="TextView" />
-        </LinearLayout>
+            android:layout_height="229dp"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
-            android:id="@+id/newsSubtitle"
+            android:id="@+id/eventName"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/eventType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/newsText"
+            android:id="@+id/eventDescription"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/eventWebURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
         <TextView
-            android:id="@+id/newsTags"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/newsDateUpdate"
+            android:id="@+id/eventTags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
