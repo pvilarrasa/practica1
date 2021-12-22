@@ -78,8 +78,4 @@ public class NewsRepository {
 
         queue.add(sR);
     }
-
-    public static News getNewsAt(int position){
-        return news.get(position);
-    }
 }
