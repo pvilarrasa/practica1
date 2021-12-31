@@ -18,6 +18,7 @@ import com.google.android.material.snackbar.Snackbar;
 import cat.urv.deim.padm.comm.databinding.ActivityMenuBinding;
 import cat.urv.deim.padm.comm.persistence.AppDatabase;
 import cat.urv.deim.padm.comm.persistence.EventRepository;
+import cat.urv.deim.padm.comm.persistence.NewsRepository;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "dev-community").allowMainThreadQueries().build();
         EventRepository.setEventDao(db.eventDao());
+        NewsRepository.setNewsDao(db.newsDao());
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

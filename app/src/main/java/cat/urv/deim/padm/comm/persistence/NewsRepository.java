@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cat.urv.deim.padm.comm.ui.news.NewsRecyclerViewAdapter;
-
 public class NewsRepository {
 
     public static String errorMessage;
@@ -30,8 +28,20 @@ public class NewsRepository {
 
     public static List<News> news;
 
+    private static NewsDao newsDao;
+
+    public static void setNewsDao(NewsDao dao){
+        newsDao = dao;
+    }
+
+    public static List<News> getAllNews() { return newsDao.getAll();}
+
+    public static void insertAllNews(List<News> news){
+        newsDao.insertAll(news);
+    }
+
     // crida volley per a obtenir news usuari
-    public static void obtainNews(Context context, String email, String username, String token, NewsRecyclerViewAdapter adapter){
+    public static void obtainNews(Context context, String email, String username, String token){
         String url = "https://apidev.gdgtarragona.net/api/json/news";
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -48,12 +58,9 @@ public class NewsRepository {
                         Gson gson = new Gson();
                         Type listNews = new TypeToken<ArrayList<News>>(){}.getType();
                         news = new Gson().fromJson(jsA, listNews);
-
+                        insertAllNews(news);
                         validNews = true;
-                        adapter.setNews(news);
-                        adapter.notifyDataSetChanged();
                     }else{
-                        //errorMessage = message;
                         validNews = false;
                     }
                 } catch (JSONException e) {

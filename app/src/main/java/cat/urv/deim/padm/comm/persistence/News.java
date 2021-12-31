@@ -3,18 +3,48 @@ package cat.urv.deim.padm.comm.persistence;
 
 import java.io.Serializable;
 
-public class News implements Serializable {
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "news")
+public class News implements Serializable {
+    @PrimaryKey
     int id;
+
+    @ColumnInfo(name = "date")
     String date;
+
+    @ColumnInfo(name = "dateUpdate")
     String dateUpdate;
+
+    @ColumnInfo(name = "imageURL")
     String imageURL;
+
+    @ColumnInfo(name = "subtitle")
     String subtitle;
-    Tag tags[];
+
+    @Ignore
+    cat.urv.deim.padm.comm.persistence.Tag tags[];
+
+    @ColumnInfo(name = "text")
     String text;
+
+    @ColumnInfo(name = "title")
     String title;
 
-    public News(int id, String date, String dateUpdate, String imageUrl, String subtitle, Tag[] listTags, String text, String title) {
+    public News(int id, String date, String dateUpdate, String imageURL, String subtitle, String text, String title) {
+        this.id = id;
+        this.date = date;
+        this.dateUpdate = dateUpdate;
+        this.imageURL = imageURL;
+        this.subtitle = subtitle;
+        this.text = text;
+        this.title = title;
+    }
+
+    public News(int id, String date, String dateUpdate, String imageUrl, String subtitle, cat.urv.deim.padm.comm.persistence.Tag[] listTags, String text, String title) {
         this.id = id;
         this.date = date;
         this.dateUpdate = dateUpdate;

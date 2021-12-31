@@ -2,6 +2,7 @@ package cat.urv.deim.padm.comm.ui.events;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,6 +67,7 @@ public class EventsRecyclerViewAdapter extends RecyclerView.Adapter {
         private TextView name;
         private TextView type;
         private Button button;
+        private Button url;
 
         private final Context context;
 

@@ -70,7 +70,7 @@
             android:id="@+id/newsTags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Tags"
             android:textAlignment="viewStart"
             android:textStyle="bold" />
 

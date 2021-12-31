@@ -55,8 +55,11 @@
             android:id="@+id/eventWebURL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:onClick="clickTextView"
             android:text="TextView"
-            android:textColor="#3F51B5" />
+            android:textColor="#3F51B5"
+            tools:ignore="OnClick" />
 
         <Space
             android:layout_width="match_parent"

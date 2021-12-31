@@ -55,7 +55,7 @@ public class NewsDetailActivity extends AppCompatActivity {
         this.dateTextView.setText(this.news.getDate());
         this.subtitleTextView.setText(this.news.getSubtitle());
         this.textTextView.setText(this.news.getText());
-        this.tagsTextView.setText(this.news.getTagsAsString());
+        //this.tagsTextView.setText(this.news.getTagsAsString());
         this.dateUpdateTextView.setText("Last updated: " + this.news.getDateUpdate());
 
         Picasso.get()

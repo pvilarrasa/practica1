@@ -44,19 +44,19 @@ public class EventRepository {
 
     // crida volley per a obtenir events usuari
     public static void obtainEvents(Context context, String email, String username, String token){
-                        String url = "https://apidev.gdgtarragona.net/api/json/events";
-                        RequestQueue queue = Volley.newRequestQueue(context);
-                        StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                UserRepository.username = username;
-                                UserRepository.email = email;
-                                UserRepository.token = token;
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    String jsA = jsonObject.getString("events");
-                                    int status = jsonObject.getInt("status");
-                                    if(status == 200){
+        String url = "https://apidev.gdgtarragona.net/api/json/events";
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                UserRepository.username = username;
+                UserRepository.email = email;
+                UserRepository.token = token;
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String jsA = jsonObject.getString("events");
+                    int status = jsonObject.getInt("status");
+                    if(status == 200){
                         Gson gson = new Gson();
                         Type listEvents = new TypeToken<ArrayList<Event>>(){}.getType();
                         events = new Gson().fromJson(jsA, listEvents);
@@ -86,9 +86,5 @@ public class EventRepository {
         };
 
         queue.add(sR);
-    }
-
-    public static Event getEventsAt(int position){
-        return events.get(position);
     }
 }

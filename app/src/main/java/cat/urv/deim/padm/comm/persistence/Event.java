@@ -30,6 +30,7 @@ public class Event implements Serializable {
 
     @ColumnInfo(name = "webURL")
     String webURL;
+
     public Event(int id, String description, String imageURL, String name, String type, String webURL) {
         this.id = id;
         this.description = description;

@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import cat.urv.deim.padm.comm.LoginActivity;
 import cat.urv.deim.padm.comm.R;
 import cat.urv.deim.padm.comm.databinding.FragmentNewsRecyclerBinding;
+import cat.urv.deim.padm.comm.persistence.Event;
+import cat.urv.deim.padm.comm.persistence.EventRepository;
+import cat.urv.deim.padm.comm.persistence.News;
 import cat.urv.deim.padm.comm.persistence.NewsRepository;
 import cat.urv.deim.padm.comm.persistence.UserRepository;
 
@@ -23,6 +28,8 @@ public class NewsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        NewsRepository.obtainNews(getContext(), UserRepository.email, UserRepository.username, UserRepository.token);
 
         binding = FragmentNewsRecyclerBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -43,8 +50,10 @@ public class NewsFragment extends Fragment {
                                            NewsRepository.news);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
-            NewsRepository.obtainNews(getContext(), UserRepository.email, UserRepository.username, UserRepository.token, adapter);
-            System.out.println("");
+
+            List<News> news = NewsRepository.getAllNews();
+            adapter.setNews(news);
+            adapter.notifyDataSetChanged();
         }
     }
 
