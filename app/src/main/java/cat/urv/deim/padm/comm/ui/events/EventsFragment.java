@@ -11,9 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 import cat.urv.deim.padm.comm.R;
 import cat.urv.deim.padm.comm.databinding.FragmentEventsRecyclerBinding;
 import cat.urv.deim.padm.comm.databinding.FragmentNewsRecyclerBinding;
+import cat.urv.deim.padm.comm.persistence.Event;
+import cat.urv.deim.padm.comm.persistence.EventDao;
 import cat.urv.deim.padm.comm.persistence.EventRepository;
 import cat.urv.deim.padm.comm.persistence.NewsRepository;
 import cat.urv.deim.padm.comm.persistence.UserRepository;
@@ -26,6 +30,8 @@ public class EventsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        EventRepository.obtainEvents(getContext(), UserRepository.email, UserRepository.username, UserRepository.token);
 
         binding = FragmentEventsRecyclerBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -43,11 +49,13 @@ public class EventsFragment extends Fragment {
             adapter = new EventsRecyclerViewAdapter(
                     getContext(),
                     R.layout.listview_item,
-                    EventRepository.events);
+                    null);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(adapter);
-            EventRepository.obtainEvents(getContext(), UserRepository.email, UserRepository.username, UserRepository.token, adapter);
-            System.out.println("");
+
+            List<Event> events = EventRepository.getAllEvents();
+            adapter.setEvents(events);
+            adapter.notifyDataSetChanged();
         }
     }
 

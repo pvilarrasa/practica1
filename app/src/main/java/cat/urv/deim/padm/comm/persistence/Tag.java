@@ -1,10 +1,17 @@
 package cat.urv.deim.padm.comm.persistence;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+@Entity
 public class Tag implements Serializable {
 
+    @ColumnInfo
     String description;
+    @PrimaryKey
     String name;
 
     public Tag(String description, String name) {

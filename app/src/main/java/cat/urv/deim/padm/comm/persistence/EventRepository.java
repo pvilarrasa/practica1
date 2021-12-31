@@ -22,39 +22,47 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cat.urv.deim.padm.comm.ui.events.EventsRecyclerViewAdapter;
-
 public class EventRepository {
 
-    public static String errorMessage;
     public static boolean validEvents;
 
-    public static List<Event> events;
+    private static List<Event> events;
+
+    private static EventDao eventDao;
+
+    public static void setEventDao(EventDao dao){
+        eventDao = dao;
+    }
+
+    public static List<Event> getAllEvents(){
+        return eventDao.getAll();
+    }
+
+    public static void insertAllEvents(List<Event> events){
+        eventDao.insertAll(events);
+    }
 
     // crida volley per a obtenir events usuari
-    public static void obtainEvents(Context context, String email, String username, String token, EventsRecyclerViewAdapter adapter){
-        String url = "https://apidev.gdgtarragona.net/api/json/events";
-        RequestQueue queue = Volley.newRequestQueue(context);
-        StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                UserRepository.username = username;
-                UserRepository.email = email;
-                UserRepository.token = token;
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String jsA = jsonObject.getString("events");
-                    int status = jsonObject.getInt("status");
-                    if(status == 200){
+    public static void obtainEvents(Context context, String email, String username, String token){
+                        String url = "https://apidev.gdgtarragona.net/api/json/events";
+                        RequestQueue queue = Volley.newRequestQueue(context);
+                        StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                UserRepository.username = username;
+                                UserRepository.email = email;
+                                UserRepository.token = token;
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    String jsA = jsonObject.getString("events");
+                                    int status = jsonObject.getInt("status");
+                                    if(status == 200){
                         Gson gson = new Gson();
                         Type listEvents = new TypeToken<ArrayList<Event>>(){}.getType();
                         events = new Gson().fromJson(jsA, listEvents);
-
+                        insertAllEvents(events);
                         validEvents = true;
-                        adapter.setEvents(events);
-                        adapter.notifyDataSetChanged();
                     }else{
-                        //errorMessage = message;
                         validEvents = false;
                     }
                 } catch (JSONException e) {

@@ -1,18 +1,43 @@
 package cat.urv.deim.padm.comm.persistence;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 
+@Entity(tableName = "events")
 public class Event implements Serializable {
-
+    @PrimaryKey
     int id;
+
+    @ColumnInfo(name = "description")
     String description;
+
+    @ColumnInfo(name = "imageURL")
     String imageURL;
+
+    @ColumnInfo(name = "name")
     String name;
+
+    @Ignore
     cat.urv.deim.padm.comm.persistence.Tag tags[];
+
+    @ColumnInfo(name = "type")
     String type;
+
+    @ColumnInfo(name = "webURL")
     String webURL;
-
-
+    public Event(int id, String description, String imageURL, String name, String type, String webURL) {
+        this.id = id;
+        this.description = description;
+        this.imageURL = imageURL;
+        this.name = name;
+        this.type = type;
+        this.webURL = webURL;
+    }
     public Event(int id, String description, String imageURL, String name, cat.urv.deim.padm.comm.persistence.Tag[] tags, String type, String webURL) {
         this.id = id;
         this.description = description;

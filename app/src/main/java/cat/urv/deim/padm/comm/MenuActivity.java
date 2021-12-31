@@ -10,21 +10,27 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.room.Room;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import cat.urv.deim.padm.comm.databinding.ActivityMenuBinding;
+import cat.urv.deim.padm.comm.persistence.AppDatabase;
+import cat.urv.deim.padm.comm.persistence.EventRepository;
 
 public class MenuActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMenuBinding binding;
 
+    private AppDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "dev-community").allowMainThreadQueries().build();
+        EventRepository.setEventDao(db.eventDao());
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 

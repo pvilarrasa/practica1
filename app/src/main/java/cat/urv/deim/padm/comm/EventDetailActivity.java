@@ -41,7 +41,7 @@ public class EventDetailActivity extends AppCompatActivity {
         // omplim les vistes amb les dades
         this.descriptionTextView.setText(this.event.getDescription());
         this.nameTextView.setText(this.event.getName());
-        this.tagsTextView.setText(this.event.getTagsAsString());
+        //this.tagsTextView.setText(this.event.getTagsAsString());
         this.typeTextView.setText(this.event.getType());
         this.webUrlTextView.setText(this.event.getWebURL());
 
