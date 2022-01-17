@@ -29,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cat.urv.deim.padm.comm.AppConfig;
 import cat.urv.deim.padm.comm.LoginActivity;
 import cat.urv.deim.padm.comm.R;
 
@@ -119,7 +120,7 @@ public class UserRepository {
 
     // crida volley per a obtenir token usuari
     public static void obtainUserToken(Context context, String email, String username, String password){
-        String url = "https://apidev.gdgtarragona.net/api/json/obtain_token";
+        String url = AppConfig.DEFAULT_URL + "/obtain_token";
         String pepe = ";!";
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

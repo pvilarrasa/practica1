@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cat.urv.deim.padm.comm.AppConfig;
+
 public class EventRepository {
 
     public static boolean validEvents;
@@ -44,7 +46,7 @@ public class EventRepository {
 
     // crida volley per a obtenir events usuari
     public static void obtainEvents(Context context, String email, String username, String token){
-        String url = "https://apidev.gdgtarragona.net/api/json/events";
+        String url = AppConfig.DEFAULT_URL + "/events";
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

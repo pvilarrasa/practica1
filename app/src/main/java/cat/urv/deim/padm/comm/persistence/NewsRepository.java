@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cat.urv.deim.padm.comm.AppConfig;
+
 public class NewsRepository {
 
     public static String errorMessage;
@@ -42,7 +44,7 @@ public class NewsRepository {
 
     // crida volley per a obtenir news usuari
     public static void obtainNews(Context context, String email, String username, String token){
-        String url = "https://apidev.gdgtarragona.net/api/json/news";
+        String url = AppConfig.DEFAULT_URL + "/news";
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sR = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
